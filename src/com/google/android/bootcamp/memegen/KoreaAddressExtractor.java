@@ -11,22 +11,14 @@ import java.util.regex.Pattern;
  * Created by chungha on 12/15/14.
  */
 public class KoreaAddressExtractor implements Extractor {
-    static String [] firstLayerTokens = {
-      "서울",
-      "제주",
-      "인천",
-      "부산",
-      "경기",
-      "강원",
-      "충청",
-      "전라",
-      "경상"
-    };
-    static String [] secondLayerPatterns = {
-      " .*도 .*시 .*동 [1-9][0-9]*",
-      " .*시 .*구 .*동 .* [1-9][0-9]*",
-    };
-
+	private String[] firstLayerTokens;
+	private String[] secondLayerPatterns;
+	
+	public KoreaAddressExtractor(String[] firstLayerTokens, String[] secondLayerPatterns) {
+		this.firstLayerTokens = firstLayerTokens;
+		this.secondLayerPatterns = secondLayerPatterns;
+	}
+	
     @Override
     public List<String> extract(String s) {
       Set<String> result = new HashSet<String>();

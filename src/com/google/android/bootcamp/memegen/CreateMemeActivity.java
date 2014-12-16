@@ -37,13 +37,14 @@ public class CreateMemeActivity extends Activity {
         final String message = getIntent().getStringExtra(Intent.EXTRA_TEXT);
         Log.d(TAG, "intent.getAction().equals(Intent.ACTION_SEND) - " + message);
 
-        final Context context = this;
         Executors.newSingleThreadExecutor().submit(new Runnable() {
           @Override
           public void run() {
             Log.d(TAG, "Extraction!");
             TagContentExtractor e = new TagContentExtractor();
-            KoreaAddressExtractor ke = new KoreaAddressExtractor();
+            KoreaAddressExtractor ke = new KoreaAddressExtractor(
+            		getResources().getStringArray(R.array.korean_first_layer),
+            		getResources().getStringArray(R.array.korean_second_layer));
             try {
               List<String> contents = e.extract(message);
               for (String c : contents) {
@@ -51,7 +52,7 @@ public class CreateMemeActivity extends Activity {
                 List<String> addresses = ke.extract(c);
                 for (String a : addresses) {
                   Log.d(TAG, "+++ " + a);
-                  Pair<Double, Double> p = AddressToGeoPointTranslator.run(context, a);
+                  Pair<Double, Double> p = AddressToGeoPointTranslator.run(CreateMemeActivity.this, a);
                   if (p != null) {
                     Log.d(TAG, "GeoTag OK - " + String.format("%s - %f / %f", a, p.first, p.second));
 
