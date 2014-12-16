@@ -1,20 +1,13 @@
 package com.google.android.bootcamp.memegen;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
-import android.view.Menu;
-import android.view.MenuItem;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.Executors;
-
-import de.l3s.boilerpipe.BoilerpipeProcessingException;
 
 /**
  * Activity for creating a meme.
@@ -60,10 +53,6 @@ public class CreateMemeActivity extends Activity {
                   }
                 }
               }
-            } catch (MalformedURLException e1) {
-              e1.printStackTrace();
-            } catch (BoilerpipeProcessingException e1) {
-              e1.printStackTrace();
             } catch (IOException e1) {
               e1.printStackTrace();
             }
